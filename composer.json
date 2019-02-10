@@ -1,0 +1,23 @@
+{
+    "name": "milestone/pd",
+    "description": "Product Demonstration",
+    "type": "laravel-package",
+    "authors": [
+        {
+            "name": "Milestone Innovative Technologies",
+            "email": "info@milestoneit.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Milestone\\PD\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Milestone\\PD\\PDServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,0 +1,27 @@
+<?php
+
+namespace Milestone\PD\Seeder;
+
+use Illuminate\Database\Seeder;
+
+class ResourceFormFieldOptionTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
+        \DB::statement('set foreign_key_checks = 0');
+        \Milestone\Appframe\Model\ResourceFormFieldOption::query()
+            ->create([	'id' => '501', 	'form_field' => '504', 	'type' => 'enum', 													])
+            ->create([	'id' => '502', 	'form_field' => '505', 	'type' => 'enum', 													])
+            ->create([	'id' => '503', 	'form_field' => '515', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 										])
+            ->create([	'id' => '504', 	'form_field' => '511', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 										])
+            ->create([	'id' => '505', 	'form_field' => '518', 	'type' => 'enum', 													])
+        ;
+        \DB::statement('set foreign_key_checks = ' . $_);
+    }
+}
