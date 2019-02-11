@@ -23,7 +23,7 @@ class CreateWishlistProductsTable extends Migration
             $table->timestamp('removed_on')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->enum('product_status', ['Active','Inactive'])->default('Active')->index();
             $table->enum('status', ['Active','Inactive'])->default('Active')->index();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('wishlist')->references('id')->on('wishlists')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('product')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('added_by')->references('id')->on('visitors')->onUpdate('cascade')->onDelete('set null');

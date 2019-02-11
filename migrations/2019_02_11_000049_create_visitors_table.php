@@ -18,7 +18,7 @@ class CreateVisitorsTable extends Migration
             $table->string('name', 64)->index();
             $table->string('email', 256)->nullable();
             $table->string('number', 64)->nullable();
-            $table->timestamps();
+            $table->audit();
         });
     }
 

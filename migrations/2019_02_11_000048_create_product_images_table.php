@@ -20,7 +20,7 @@ class CreateProductImagesTable extends Migration
             $table->string('image', 128)->nullable();
             $table->enum('default', ['Yes','No'])->default('Yes')->index();
             $table->enum('status', ['Active','Inactive'])->default('Active')->index();
-            $table->timestamps();
+            $table->audit();
             $table->foreign('product')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
         });
     }

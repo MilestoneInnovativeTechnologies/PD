@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVisitorWishlistsTable extends Migration
+class CreateVendorWishlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateVisitorWishlistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('visitor_wishlists', function (Blueprint $table) {
+        Schema::create('vendor_wishlists', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('visitor')->nullable()->index();
             $table->unsignedInteger('wishlist')->nullable()->index();
-            $table->enum('viewed', ['Yes','No'])->default('No')->index();
             $table->enum('status', ['Active','Inactive'])->default('Active')->index();
-            $table->timestamps();
-            $table->foreign('visitor')->references('id')->on('visitors')->onUpdate('cascade')->onDelete('set null');
+            $table->enum('viewed', ['Yes','No'])->default('No')->index();
+            $table->audit();
             $table->foreign('wishlist')->references('id')->on('wishlists')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -32,6 +30,6 @@ class CreateVisitorWishlistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visitor_wishlists');
+        Schema::dropIfExists('vendor_wishlists');
     }
 }

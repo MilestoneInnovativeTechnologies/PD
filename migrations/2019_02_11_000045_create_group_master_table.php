@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemGroupMasterTable extends Migration
+class CreateGroupMasterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateItemGroupMasterTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_group_master', function (Blueprint $table) {
+        Schema::create('group_master', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('refno', 60)->nullable();
-            $table->string('catecode', 16)->nullable();
-            $table->string('gcode', 16)->nullable();
+            $table->char('code', 15)->nullable()->index();
             $table->string('name', 64)->index();
-            $table->enum('list', ['Yes','No'])->default('Yes');
             $table->enum('type', ['Public','Private'])->default('Public')->index();
             $table->enum('status', ['Active','Inactive'])->default('Active')->index();
-            $table->timestamps();
+            $table->audit();
         });
     }
 
@@ -33,6 +30,6 @@ class CreateItemGroupMasterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_group_master');
+        Schema::dropIfExists('group_master');
     }
 }
