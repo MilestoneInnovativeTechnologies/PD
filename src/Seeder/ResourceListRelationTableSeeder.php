@@ -16,16 +16,16 @@ class ResourceListRelationTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceListRelation::query()
-            ->create([	'id' => '501', 	'resource_list' => '505', 	'relation' => '505', 													])
-            ->create([	'id' => '502', 	'resource_list' => '505', 	'relation' => '506', 													])
-            ->create([	'id' => '503', 	'resource_list' => '505', 	'relation' => '507', 													])
-            ->create([	'id' => '504', 	'resource_list' => '505', 	'relation' => '508', 													])
-            ->create([	'id' => '505', 	'resource_list' => '507', 	'relation' => '513', 													])
-            ->create([	'id' => '506', 	'resource_list' => '508', 	'relation' => '513', 													])
-            ->create([	'id' => '507', 	'resource_list' => '509', 	'relation' => '521', 													])
-            ->create([	'id' => '508', 	'resource_list' => '511', 	'relation' => '526', 													])
-            ->create([	'id' => '509', 	'resource_list' => '511', 	'relation' => '523', 													])
-            ->create([	'id' => '510', 	'resource_list' => '511', 	'relation' => '524', 													])
+            ->create([	'id' => '50001', 	'resource_list' => '50008', 	'relation' => '50013', 													])
+            ->create([	'id' => '50002', 	'resource_list' => '50005', 	'relation' => '50005', 													])
+            ->create([	'id' => '50003', 	'resource_list' => '50005', 	'relation' => '50006', 													])
+            ->create([	'id' => '50004', 	'resource_list' => '50005', 	'relation' => '50007', 													])
+            ->create([	'id' => '50005', 	'resource_list' => '50005', 	'relation' => '50008', 													])
+            ->create([	'id' => '50006', 	'resource_list' => '50007', 	'relation' => '50013', 													])
+            ->create([	'id' => '50007', 	'resource_list' => '50009', 	'relation' => '50021', 													])
+            ->create([	'id' => '50008', 	'resource_list' => '50011', 	'relation' => '50026', 													])
+            ->create([	'id' => '50009', 	'resource_list' => '50011', 	'relation' => '50023', 													])
+            ->create([	'id' => '50010', 	'resource_list' => '50011', 	'relation' => '50024', 													])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }

@@ -4,7 +4,7 @@ namespace Milestone\PD\Seeder;
 
 use Illuminate\Database\Seeder;
 
-class ProductTableSeeder extends Seeder
+class GroupMasterTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-		//
-	}
+        //
+    }
 }

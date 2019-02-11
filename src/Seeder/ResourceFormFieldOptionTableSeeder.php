@@ -16,11 +16,11 @@ class ResourceFormFieldOptionTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceFormFieldOption::query()
-            ->create([	'id' => '501', 	'form_field' => '504', 	'type' => 'enum', 													])
-            ->create([	'id' => '502', 	'form_field' => '505', 	'type' => 'enum', 													])
-            ->create([	'id' => '503', 	'form_field' => '515', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 										])
-            ->create([	'id' => '504', 	'form_field' => '511', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 										])
-            ->create([	'id' => '505', 	'form_field' => '518', 	'type' => 'enum', 													])
+            ->create([	'id' => '50001', 	'form_field' => '50001', 	'type' => 'Enum', 													])
+            ->create([	'id' => '50002', 	'form_field' => '50001', 	'type' => 'Enum', 													])
+            ->create([	'id' => '50003', 	'form_field' => '50001', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 										])
+            ->create([	'id' => '50004', 	'form_field' => '50001', 	'type' => 'Foreign', 		'value_attr' => 'id', 	'label_attr' => 'name', 										])
+            ->create([	'id' => '50005', 	'form_field' => '50001', 	'type' => 'Enum', 													])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
