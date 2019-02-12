@@ -15,7 +15,7 @@ class CreateGroupDetailsTable extends Migration
     {
         Schema::create('group_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('refno', 64)->nullable();
+            $table->string('refno', 64)->nullable()->index();
             $table->unsignedInteger('group')->nullable()->index();
             $table->char('code', 15)->nullable()->index();
             $table->string('name', 64)->index();

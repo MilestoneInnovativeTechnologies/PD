@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->string('narration9', 800)->nullable();
             $table->string('narration10', 800)->nullable();
             $table->string('refno', 64)->nullable();
-            $table->string('refno2', 64)->nullable();
+            $table->string('ref2no', 64)->nullable();
             $table->enum('itemserial', ['Yes','No'])->default('No');
             $table->enum('type', ['Public','Protected','System'])->default('Public');
             $table->unsignedInteger('group01')->nullable()->index();
