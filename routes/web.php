@@ -21,7 +21,7 @@ Route::group([
 });
 
 Route::group([
-    'namespace' => 'Milestone\\Teebpd\\Controller\\Interact',
+    'namespace' => 'Milestone\\PD\\Controller\\Interact',
     'prefix' => 'interact'
 ],function(){
     Route::get('/',function(){ return '<form method="post" enctype="multipart/form-data"><input type="file" name="file"><input type="submit"></form>'; });
