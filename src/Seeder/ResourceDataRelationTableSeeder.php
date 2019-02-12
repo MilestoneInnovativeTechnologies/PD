@@ -16,15 +16,15 @@ class ResourceDataRelationTableSeeder extends Seeder
         $_ = \DB::statement('SELECT @@GLOBAL.foreign_key_checks');
         \DB::statement('set foreign_key_checks = 0');
         \Milestone\Appframe\Model\ResourceDataRelation::query()
-            ->create([	'id' => '50001', 	'resource_data' => '50001', 	'relation' => '50011', 	'nest_relation1' => '50018', 												])
-            ->create([	'id' => '50002', 	'resource_data' => '50001', 	'relation' => '50012', 	'nest_relation1' => '50018', 												])
-            ->create([	'id' => '50003', 	'resource_data' => '50003', 	'relation' => '50013', 													])
-            ->create([	'id' => '50004', 	'resource_data' => '50003', 	'relation' => '50014', 													])
-            ->create([	'id' => '50005', 	'resource_data' => '50003', 	'relation' => '50015', 													])
-            ->create([	'id' => '50006', 	'resource_data' => '50003', 	'relation' => '50016', 	'nest_relation1' => '50021', 												])
-            ->create([	'id' => '50007', 	'resource_data' => '50003', 	'relation' => '50017', 	'nest_relation1' => '50026', 												])
-            ->create([	'id' => '50008', 	'resource_data' => '50003', 	'relation' => '50017', 	'nest_relation1' => '50023', 												])
-            ->create([	'id' => '50009', 	'resource_data' => '50003', 	'relation' => '50017', 	'nest_relation1' => '50024', 												])
+            ->create([	'id' => '50001', 	'resource_data' => '50001', 	'relation' => '50025', 	'nest_relation1' => '50032', 												])
+            ->create([	'id' => '50002', 	'resource_data' => '50001', 	'relation' => '50026', 	'nest_relation1' => '50032', 												])
+            ->create([	'id' => '50003', 	'resource_data' => '50003', 	'relation' => '50027', 													])
+            ->create([	'id' => '50004', 	'resource_data' => '50003', 	'relation' => '50028', 													])
+            ->create([	'id' => '50005', 	'resource_data' => '50003', 	'relation' => '50029', 													])
+            ->create([	'id' => '50006', 	'resource_data' => '50003', 	'relation' => '50030', 	'nest_relation1' => '50035', 												])
+            ->create([	'id' => '50007', 	'resource_data' => '50003', 	'relation' => '50031', 	'nest_relation1' => '50040', 												])
+            ->create([	'id' => '50008', 	'resource_data' => '50003', 	'relation' => '50031', 	'nest_relation1' => '50037', 												])
+            ->create([	'id' => '50009', 	'resource_data' => '50003', 	'relation' => '50031', 	'nest_relation1' => '50038', 												])
         ;
         \DB::statement('set foreign_key_checks = ' . $_);
     }
