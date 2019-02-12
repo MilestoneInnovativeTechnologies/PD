@@ -26,7 +26,7 @@ class InteractController extends Controller
     }
 
     private function setProperties($table){
-        $class = "Milestone\\Teebpd\\Controller\\Interact\\" . $table . "Controller"; $controller = $this->controller = new $class;
+        $class = __NAMESPACE__ . "\\" . $table . "Controller"; $controller = $this->controller = new $class;
         $model = $controller->Model;
         $this->model = new $model;
         $this->fillable = $controller->Fillable;
@@ -48,24 +48,29 @@ class InteractController extends Controller
         foreach ($data as $record) $result[$this->getPrimaryKeyCode($record)] = $this->insertData($record);
         return $result;
     }
+    private function do_insert($data){ return $this->do_create($data); }
 
     private function do_update($data){
         $result = [];
         foreach ($data as $record) $result[$this->getPrimaryKeyCode($record)] = $this->updateData($record);
         return $result;
     }
+    private function do_edit($data){ return $this->do_update($data); }
 
     private function do_read($data){
         if(!$data || empty($data)) return $this->getAllData(); $result = [];
         foreach ($data as $record) $result[$this->getPrimaryKeyCode($record)] = $this->getData($record);
         return $result;
     }
+    private function do_get($data){ return $this->do_read($data); }
 
     private function do_delete($data){
         if(!$data || empty($data)) return $result = [];
         foreach ($data as $record) $result[$this->getPrimaryKeyCode($record)] = $this->deleteRecord($record);
         return $result;
     }
+    private function do_destroy($data){ return $this->do_delete($data); }
+    private function do_remove($data){ return $this->do_delete($data); }
 
     private function getPrimaryKeyCode($data){
         if(!$this->pk || empty($this->pk)) return microtime(true)*1000000000;
