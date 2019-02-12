@@ -4,6 +4,7 @@ namespace Milestone\PD\Controller\Interact;
 
 use Illuminate\Http\Request;
 use Milestone\PD\Controller\Controller;
+use Milestone\PD\Model\GroupDetail;
 use Milestone\PD\Model\Product;
 use Milestone\PD\Model\ItemGroupMaster;
 
@@ -11,11 +12,10 @@ class itemmasterController extends Controller
 {
 
     public $Model = 'Milestone\PD\Model\Product';
-    public $Fillable = ['name','code','description','narration','narration2','narration3','narration4','narration5','narration6','narration7','narration8','narration9','narration10','refno','ref2no','itemserial','type','category_01','category_02','category_03','category_04','category_05','category_06','category_07','category_08','category_09','category_10','status'];
+    public $Fillable = ['name','code','description','narration','narration2','narration3','narration4','narration5','narration6','narration7','narration8','narration9','narration10','refno','ref2no','itemserial','type','group01','group02','group03','group04','group05','group06','group07','group08','group09','group10','status'];
     public $PrimaryTransform = null;
     public $PrimaryTransformMethod = 'getPrimaryValue';
     public $Transforms = [
-        'name' => 'NAME',
         'code' => 'CODE',
         'description' => 'NARRATION',
         'narration' => 'NARRATION',
@@ -34,16 +34,17 @@ class itemmasterController extends Controller
         'status' => 'STATUS'
     ];
     public $TransformMethods = [
-        'category_01' => 'getCategory01',
-        'category_02' => 'getCategory02',
-        'category_03' => 'getCategory03',
-        'category_04' => 'getCategory04',
-        'category_05' => 'getCategory05',
-        'category_06' => 'getCategory06',
-        'category_07' => 'getCategory07',
-        'category_08' => 'getCategory08',
-        'category_09' => 'getCategory09',
-        'category_10' => 'getCategory10',
+        'name' => 'getName',
+        'group01' => 'getGroup01',
+        'group02' => 'getGroup02',
+        'group03' => 'getGroup03',
+        'group04' => 'getGroup04',
+        'group05' => 'getGroup05',
+        'group06' => 'getGroup06',
+        'group07' => 'getGroup07',
+        'group08' => 'getGroup08',
+        'group09' => 'getGroup09',
+        'group10' => 'getGroup10',
     ];
 
     public function getPrimaryValue($data){
@@ -51,26 +52,34 @@ class itemmasterController extends Controller
         return $record ? $record->id : null;
     }
 
-    public function getCategory01($data){ return $this->getCategory($data,'01'); }
-    public function getCategory02($data){ return $this->getCategory($data,'02'); }
-    public function getCategory03($data){ return $this->getCategory($data,'03'); }
-    public function getCategory04($data){ return $this->getCategory($data,'04'); }
-    public function getCategory05($data){ return $this->getCategory($data,'05'); }
-    public function getCategory06($data){ return $this->getCategory($data,'06'); }
-    public function getCategory07($data){ return $this->getCategory($data,'07'); }
-    public function getCategory08($data){ return $this->getCategory($data,'08'); }
-    public function getCategory09($data){ return $this->getCategory($data,'09'); }
-    public function getCategory10($data){ return $this->getCategory($data,'10'); }
+    public function getName($data){ return $this->getGroupName($data,'03'); }
+    public function getGroup01($data){ return $this->getGroup($data,'01'); }
+    public function getGroup02($data){ return $this->getGroup($data,'02'); }
+    public function getGroup03($data){ return $this->getGroup($data,'03'); }
+    public function getGroup04($data){ return $this->getGroup($data,'04'); }
+    public function getGroup05($data){ return $this->getGroup($data,'05'); }
+    public function getGroup06($data){ return $this->getGroup($data,'06'); }
+    public function getGroup07($data){ return $this->getGroup($data,'07'); }
+    public function getGroup08($data){ return $this->getGroup($data,'08'); }
+    public function getGroup09($data){ return $this->getGroup($data,'09'); }
+    public function getGroup10($data){ return $this->getGroup($data,'10'); }
 
-    private function getCategory($data,$num){
-        $catecode = $data['CATCODE_' . $num]; $gcode = $data['GCODE_' . $num];
-        return $this->getCategoryCode($catecode,$gcode);
+    private function getGroup($data,$num){
+        $gcode = $data['CATCODE_' . $num]; $code = $data['GCODE_' . $num];
+        return $this->getGroupCode($gcode,$code);
     }
 
-    private function getCategoryCode($catecode,$gcode){
-        $refno = implode("/",[$catecode,$gcode]);
-        $record = ItemGroupMaster::where(compact('refno'))->first();
-        return ($record) ? $record->id : null;
+    private function getGroupCode($gcode,$code){
+        $refno = implode("/",[$gcode,$code]);
+        $record = GroupDetail::where(compact('refno'))->first();
+        return $record ? $record->id : null;
+    }
+
+    private function getGroupName($data,$num){
+        $gcode = $data['CATCODE_' . $num]; $code = $data['GCODE_' . $num];
+        $refno = implode("/",[$gcode,$code]);
+        $record = GroupDetail::where(compact('refno'))->first();
+        return $record ? $record->name : null;
     }
 
 }
