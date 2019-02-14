@@ -42,7 +42,7 @@ class WishListController extends Controller
         $WishList = Wishlist::find($id);
         $Author = $WishList->author == $visitor->id;
         if(!$Author && !$WishList->Visitors->filter(function($item)use($visitor){return ($item->id == $visitor->id && $item->pivot->status == 'Active'); })->count()) return 'Wishlist cannot be displayed';
-        $WishList = $WishList->load(['Notes.Author','Author','Visitors','Vendor','Items' => function($Q){ $Q->with(['Product' => function($Q){ $Q->with(['Brand','Category','Images']); },'Notes.Author','Added','Removed']); }]);
+        $WishList = $WishList->load(['Notes.Author','Author','Visitors','Vendor','Items' => function($Q){ $Q->with(['Product' => function($Q){ $Q->with(['Group01','Group02','Images']); },'Notes.Author','Added','Removed']); }]);
         return view('pd::wishlist_details',compact('WishList','Author','visitor'));
     }
     public function delete($id){
