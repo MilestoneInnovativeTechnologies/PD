@@ -1,8 +1,8 @@
 @extends('pd::layouts.demonstration')
 @php
 $metas = ['code' => 'Product Code'];
-$relat = ['Brand' => ['Brand','name'], 'Category' => ['Category','name'], 'Size' => ['Size','name']];
-$details = ['Brand' => ['Brand','name'], "Product" => ["Color","name"], "Category" => ['Category','name'], "Code" => "code", "Reference" => "narration4", "Re-Order" => "narration3", "Rack" => "narration5", "Price" => "narration6"];
+$relat = ['Brand' => ['Group02','name'], 'Category' => ['Group01','name'], 'Size' => ['Group03','name']];
+$details = ['Brand' => ['Group02','name'], "Product" => "name", "Category" => ['Group01','name'], "Code" => "code", "Reference" => "narration4", "Re-Order" => "narration3", "Rack" => "narration5", "Price" => "narration6"];
 @endphp
 @section('content')
         <div class="contents-detail single-product">

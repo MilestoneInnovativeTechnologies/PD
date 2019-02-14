@@ -1,7 +1,7 @@
 @extends('pd::layouts.demonstration')
 
 @php
-    $Products = Milestone\PD\Model\Product::with(['Images','Category','Brand','Color'])->where(['type' => 'Public','status' => 'Active'])->whereHas('Category',function($Q){ $Q->where('list','Yes'); })->whereHas('Brand',function($Q){ $Q->where('list','Yes'); });
+    $Products = Milestone\PD\Model\Product::with(['Group01','Group02','Group03','Group04'])->where(['type' => 'Public','status' => 'Active'])->whereHas('Group01',function($Q){ $Q->where('list','Yes'); })->whereHas('Group02',function($Q){ $Q->where('list','Yes'); });
     //dd($Products->get()->pluck('Brand.name','id')->toArray());
     if(!empty(request('brand'))){
         $Products->whereHas('Brand',function($Q){ $Q->where('id',request('brand')); });
