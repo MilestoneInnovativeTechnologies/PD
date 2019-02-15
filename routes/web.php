@@ -18,6 +18,28 @@ Route::group([
     Route::post('wishlist_product_alter', 'WishListController@edit')->name('product.alter');
     Route::post('wishlistproduct_note', 'WishListProductController@note')->name('wlp.note');
     Route::get('in/{code}', 'WishListController@in')->name('share.in');
+
+    Route::group([
+        'prefix' => 'api',
+        'namespace' => 'API'
+    ],function(){
+        Route::group([
+            'prefix' => 'user/{user}',
+        ],function(){
+            Route::get('/','VisitorController@visitor');
+            Route::get('create_wishlist','WishListController@create');
+            Route::get('delete_wishlist/{wishlist}','WishListController@delete');
+            Route::get('wishlist/{wl}/product/{product}/add','WishListController@product_add');
+            Route::get('wishlist/{wl}/product/{product}/remove','WishListController@product_remove');
+            Route::get('wishlist/{wl}/share','WishListController@share');
+            Route::get('wishlist/{wl}/note','WishListController@note');
+        });
+        Route::get('/','AppController@init');
+        Route::get('index','AppController@index');
+        Route::get('product','ProductController@detail');
+        Route::get('user','VisitorController@detail');
+        Route::get('wishlist','WishListController@detail');
+    });
 });
 
 Route::group([
