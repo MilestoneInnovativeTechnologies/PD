@@ -28,7 +28,7 @@ Route::group([
         ],function(){
             Route::get('/','VisitorController@visitor');
             Route::get('create_wishlist','WishListController@create');
-            Route::get('delete_wishlist/{wishlist}','WishListController@delete');
+            Route::get('wishlist/{wl}/delete','WishListController@delete');
             Route::get('wishlist/{wl}/product/{product}/add','WishListController@product_add');
             Route::get('wishlist/{wl}/product/{product}/remove','WishListController@product_remove');
             Route::get('wishlist/{wl}/share','WishListController@share');
