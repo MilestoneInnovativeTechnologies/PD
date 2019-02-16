@@ -35,6 +35,7 @@ Route::group([
             Route::get('wishlist/{wl}/note','WishListController@note');
         });
         Route::get('/','AppController@init');
+        Route::get('init','AppController@init');
         Route::get('index','AppController@index');
         Route::get('product','ProductController@detail');
         Route::get('user','VisitorController@detail');
