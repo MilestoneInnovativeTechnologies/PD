@@ -33,6 +33,7 @@ Route::group([
             Route::get('wishlist/{wl}/product/{product}/remove','WishListController@product_remove');
             Route::get('wishlist/{wl}/share','WishListController@share');
             Route::get('wishlist/{wl}/note','WishListController@note');
+            Route::get('wishlist/{wl}/vendor/{status}','WishListController@vendor');
         });
         Route::get('/','AppController@init');
         Route::get('init','AppController@init');

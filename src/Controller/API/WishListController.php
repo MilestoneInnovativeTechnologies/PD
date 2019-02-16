@@ -96,4 +96,10 @@ class WishListController extends Controller
         return array_merge(['note' => $wln],self::wishlist($wl));
     }
 
+    public function vendor($user,$wl,$status){
+        if(!$user || !($visitor = Visitor::find($user)) || !$wl || !($wishlist = $visitor->Wishlists()->find($wl) ?: $visitor->SharedWishlist()->find($wl))) return $this->noPrivilegeResponse();
+        if($status == 'Active' || $status == 'Inactive') { $wishlist->Vendor->status = $status; $wishlist->push(); }
+        return array_merge(['vendor' => $wishlist->Vendor],self::wishlist($wl));
+    }
+
 }
