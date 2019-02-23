@@ -21,7 +21,8 @@ Route::group([
 
     Route::group([
         'prefix' => 'api',
-        'namespace' => 'API'
+        'namespace' => 'API',
+        'middleware' => '\App\Http\Middleware\Cors'
     ],function(){
         Route::group([
             'prefix' => 'user/{user}',
@@ -37,6 +38,7 @@ Route::group([
         });
         Route::get('/','AppController@init');
         Route::get('init','AppController@init');
+        Route::get('register','VisitorController@register');
         Route::get('index','AppController@index');
         Route::get('product','ProductController@detail');
         Route::get('user','VisitorController@detail');
