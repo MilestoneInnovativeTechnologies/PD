@@ -16,9 +16,8 @@ class VisitorController extends Controller
         return self::visitor($uid);
     }
 
-    private function noUserResponse(){
-        return [];
-    }
+    private function noUserResponse(){ return []; }
+    private function registerErrorResponse(){ return ['error' => true, 'message' => 'Name and Email are mandatory']; }
 
     static function visitor($id){
         $app = new self(); $user = $app->getUser($id);
@@ -38,6 +37,12 @@ class VisitorController extends Controller
         if(!$visitor) $visitor = new Visitor;
         $visitor->forceFill(array_filter(compact('name','email','number')))->save();
         return $visitor;
+    }
+
+    public function register(Request $request){
+        if(!$request->get('email') || !$request->get('name')) return $this->registerErrorResponse();
+        $visitor = self::AddOrGetVisitor($request->get('email'),$request->get('name'),$request->get('number'));
+        return self::visitor($visitor->id);
     }
 
 }
