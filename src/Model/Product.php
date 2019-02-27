@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'products';
+    protected $with = ['Images'];
 
     public function Group01(){ return $this->belongsTo(GroupDetail::class, 'group01', 'id'); }
     public function Group02(){ return $this->belongsTo(GroupDetail::class, 'group02', 'id'); }
