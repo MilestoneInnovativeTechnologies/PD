@@ -27,8 +27,8 @@ class VisitorController extends Controller
     }
 
     private function getUser($user){ return Visitor::select(['id','name','email','number'])->find($user); }
-    private function getUserWL($user){ return Wishlist::select(['id','name','description'])->where(['author' => $user,'status' => 'Active'])->with(['Products' => function($Q){ $Q->select([DB::raw('products.id'),'name','description']); }])->get(); }
-    private function getSharedWL($user){ return VisitorWishlist::where(['visitor' => $user,'status' => 'Active'])->with(['Wishlist' => function($Q){ $Q->select(['id','name','description','author'])->with(['Author' => function($Q){ $Q->select(['id','name','number','email']); }]); }])->get()->map->Wishlist; }
+    private function getUserWL($user){ return Wishlist::select(['id','name','description'])->where(['author' => $user,'status' => 'Active'])->with(['Vendor','Products' => function($Q){ $Q->select([DB::raw('products.id'),'name','description']); }])->get(); }
+    private function getSharedWL($user){ return VisitorWishlist::where(['visitor' => $user,'status' => 'Active'])->with(['Wishlist' => function($Q){ $Q->select(['id','name','description','author'])->with(['Vendor','Author' => function($Q){ $Q->select(['id','name','number','email']); }]); }])->get()->map->Wishlist; }
 
     static function AddOrGetVisitor($email,$name = '',$number = null){
         $visitor = null;
