@@ -45,4 +45,15 @@ class VisitorController extends Controller
         return self::visitor($visitor->id);
     }
 
+    public function update($user, Request $request){
+        $update_array = $request->only(['name','email','number']);
+        if(!empty($update_array)){
+            $User = Visitor::find($user);
+            foreach ($update_array as $key => $value)
+                $User->$key = $value;
+            $User->save();
+        }
+        return self::visitor($user);
+    }
+
 }
