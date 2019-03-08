@@ -32,6 +32,6 @@ class ShareWishlist extends Mailable
      */
     public function build()
     {
-        return $this->from('no-reply@pd.milestoneit.online')->text('pd::email.sharewishlist')->subject('[TEEB Emirates] - Wish List shared with You');
+        return $this->from('no-reply@pd.milestoneit.online')->text('pd::email.sharewishlist')->subject('Wish List shared with You');
     }
 }
