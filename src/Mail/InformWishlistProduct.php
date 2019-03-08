@@ -32,6 +32,6 @@ class InformWishlistProduct extends Mailable
      */
     public function build()
     {
-        return $this->text('pd::email.informwishlistproductadded')->subject('[TEEB Emirates] - Product Added to Wish List by a Visitor');
+        return $this->from('no-reply@pd.milestoneit.online')->text('pd::email.informwishlistproductadded')->subject('[TEEB Emirates] - Product Added to Wish List by a Visitor');
     }
 }
