@@ -22,7 +22,7 @@ Route::group([
     Route::group([
         'prefix' => 'api',
         'namespace' => 'API',
-        'middleware' => '\App\Http\Middleware\Cors'
+        'middleware' => [\App\Http\Middleware\Cors::class,\App\Http\Middleware\APIDebug::class]
     ],function(){
         Route::group([
             'prefix' => 'user/{user}',
