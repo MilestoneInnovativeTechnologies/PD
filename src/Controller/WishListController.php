@@ -33,7 +33,7 @@ class WishListController extends Controller
         if(!$visitor){ session()->flash('error','No visitor defined to create a wish list'); return back(); }
         $wishlist_id = ($request->wishlist == "-1") ? $visitor->Wishlists()->save((new Wishlist)->forceFill($request->only(['name','description'])))->id : $request->wishlist;
         $wishlist = WishList::find($wishlist_id);
-        if($request->product && !$wishlist->Items->where('product',$request->product)->count()) $wishlist->Items()->save((new WishlistProduct)->forceFill(['product' => $request->product, 'added_by' => $visitor->id, 'added_on' => date('Y-m-d H:i:s')]));
+        if($request->product && !$wishlist->Items->where('product',$request->product)->count()) $wishlist->Items()->save((new WishlistProduct)->forceFill(['product' => $request->product, 'quantity' => $request->quantity ?: 1, 'added_by' => $visitor->id, 'added_on' => date('Y-m-d H:i:s')]));
         session()->flash('info','Product added to Wish List.');
         return back();
     }

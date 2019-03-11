@@ -54,11 +54,12 @@ class WishListController extends Controller
         return array_merge(['delete' => $wishlist],VisitorController::visitor($user));
     }
 
-    public function product_add($user,$wl,$product){
+    public function product_add($user,$wl,$product,Request $request){
         if(!$user || !($visitor = Visitor::find($user)) || !$wl || !($wishlist = $visitor->Wishlists()->find($wl) ?: $visitor->SharedWishlist()->find($wl))) return $this->noPrivilegeResponse();
         $prd = $wishlist->Items()->where(compact('product'));
         if($prd->exists()) $item = $this->wl_product($prd->first(),$user);
         else{ $wishlist->Products()->attach($product); $item = $this->wl_product($wishlist->Items()->where(compact('product'))->first(),$user); }
+        if($request->has('quantity')) $item = $this->wli_quantity($item,$request->quantity ?: 1);
         return array_merge(['add' => $item],self::wishlist($wl));
     }
 
@@ -74,6 +75,11 @@ class WishListController extends Controller
         $mode = $activity . 'ed_by'; $on = $activity . 'ed_on'; $status = $activity == 'add' ? 'Active' : 'Inactive';
         $item->$mode = $user; $item->$on = date('Y-m-d H:i:s'); $item->product_status = $status;
         if($activity == 'add') $item->removed_by = null;
+        $item->save(); return $item;
+    }
+
+    private function wli_quantity($item,$quantity){
+        $item->quantity = $quantity;
         $item->save(); return $item;
     }
 
