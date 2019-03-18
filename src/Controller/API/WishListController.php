@@ -3,6 +3,7 @@
 namespace Milestone\PD\Controller\API;
 
 use Illuminate\Http\Request;
+use Milestone\PD\Model\ProductField;
 use Milestone\PD\Model\Visitor;
 use Milestone\PD\Model\VisitorWishlist;
 use Milestone\PD\Model\Wishlist;
@@ -33,9 +34,23 @@ class WishListController extends Controller
         return compact('wishlist','items','shares','notes');
     }
     public function getWL($id){ return Wishlist::select(['id','name','description','author','status'])->with(['Author' => function($Q){ $Q->select(['id','name','email','number']); },'Vendor' => function($Q){ $Q->select(['id','wishlist','status']); }])->find($id); }
-    public function getItems($id){ return Wishlist::with(['Items' => function($Q){ $Q->with(['Added' => function($Q){ $Q->select(['id','name']); },'Removed' => function($Q){ $Q->select(['id','name']); }])->select(['id','wishlist','product','quantity','added_by','added_on','removed_by','removed_on','product_status']); }])->find($id)->Items; }
     public function getShares($id){ return Wishlist::with(['Share' => function($Q){ $Q->select(['id','visitor','wishlist'])->with(['Visitor' => function($Q){ $Q->select(['id','name','email','number']); }]); }])->find($id)->Share->map->Visitor; }
     public function getNotes($id){ return Wishlist::with(['Notes' => function($Q){ $Q->select(['id','wishlist','note','author','created_at'])->with(['Author' => function($Q){ $Q->select(['id','name']); }]); }])->find($id)->Notes->map(function($data){ return collect($data)->only(['id','note','created_at'])->merge(['author' => $data->Author->name]); }); }
+    public function getItems($id){
+        return Wishlist::with([
+            'Items' => function($Q){ $Q->with([
+                'Added' => function($Q){ $Q->select(['id','name']); },
+                'Removed' => function($Q){ $Q->select(['id','name']); },
+                'Product' => function($Q){
+                    $fields = array_merge(ProductController::$detailFields,ProductField::pluck('field_name')->toArray());
+                    $groups = array_intersect(array_map('strtolower',ProductController::$relationsGroup),$fields);
+                    $Q->select($fields)->with($groups); }
+                ])
+                ->select(['id','wishlist','product','quantity','added_by','added_on','removed_by','removed_on','product_status']); }
+                ])
+            ->find($id)
+            ->Items;
+    }
 
     public function isAuth($user,$wl){ return !(!$user || !($visitor = Visitor::find($user)) || !$wl || !($wishlist = $visitor->Wishlists()->find($wl))); }
 
